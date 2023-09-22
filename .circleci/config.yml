@@ -18,10 +18,12 @@ jobs:
       - run:
           name: Build Hugo Site
           command: hugo
-
-      - store_artifacts:
-          path: public
-          destination: artifact-file
+      - run:
+          name: Create directory
+          command: mkdir -p workspace
+      - persist_to_workspace:
+          root: /workspace
+          paths: [./public]
 
   deploy:
     executor: hugo-executor
