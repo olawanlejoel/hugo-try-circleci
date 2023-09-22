@@ -6,7 +6,7 @@ executors:
       - image: cibuilds/hugo:latest
 
 jobs:
-  build-and-deploy:
+  build:
     executor: hugo-executor
     steps:
       - checkout
