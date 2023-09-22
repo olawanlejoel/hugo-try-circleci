@@ -23,7 +23,7 @@ jobs:
           command: mkdir -p workspace
       - persist_to_workspace:
           root: /workspace
-          paths: [./public]
+          paths: public
 
   deploy:
     executor: hugo-executor
