@@ -3,7 +3,7 @@ name: Build and Deploy Hugo Site
 on:
   push:
     branches:
-      - main  # Adjust this to the main branch name of your repository
+      - main # Adjust this to the main branch name of your repository
 
 jobs:
   build:
@@ -12,6 +12,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+
+      - name: Update theme
+        # (Optional)If you have the theme added as submodule, you can pull it and use the most updated version
+        run: git submodule update --init --recursive
 
       - name: Set Up Hugo
         uses: peaceiris/actions-hugo@v2
@@ -27,7 +31,7 @@ jobs:
         with:
           name: compiled-site
           path: public
-# Deploy job
+  # Deploy job
   deploy:
     name: Deploy
     needs: build
@@ -48,7 +52,7 @@ jobs:
           path: public
       # Commit and push to the repo's <deploy> branch
       - name: Commit and push
-      # Replace "VirtuaCreative" and "virtuacreative" with your GH org or user name
+        # Replace "VirtuaCreative" and "virtuacreative" with your GH org or user name
         run: |
           git config user.name "olawanlejoel"
           git config user.email "olawanlejoel@users.noreply.github.com"
