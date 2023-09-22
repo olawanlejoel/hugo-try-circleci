@@ -19,9 +19,9 @@ jobs:
           name: Build Hugo Site
           command: hugo
 
-      - persist_to_workspace:
-          root: /workspace
-          paths: [./public]
+      - store_artifacts:
+          path: public
+          destination: artifact-file
 
   deploy:
     executor: hugo-executor
