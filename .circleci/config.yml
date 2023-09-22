@@ -1,0 +1,43 @@
+version: 2.1
+
+executors:
+  hugo-executor:
+    docker:
+      - image: cibuilds/hugo:latest
+
+jobs:
+  build-and-deploy:
+    executor: hugo-executor
+    steps:
+      - checkout
+
+      - run:
+          name: Update theme
+          command: git submodule update --init --recursive
+
+      - run:
+          name: Build Hugo Site
+          command: hugo
+
+      - persist_to_workspace:
+          root: public
+          paths: [./public]
+
+  deploy:
+    executor: hugo-executor
+    steps:
+      - attach_workspace:
+          at: /workspace
+
+      - run:
+          name: Configure Git
+          command: |
+            git config --global user.name "olawanlejoel"
+            git config --global user.email "olawanlejoel@users.noreply.github.com"
+            git clone ${CIRCLE_REPOSITORY_URL} /repo
+            cd /repo
+            git checkout -b deploy
+            rsync -av --delete /workspace/public/ /repo/
+            git add .
+            git commit -m "Auto generated from ${CIRCLE_SHA1}"
+            git push origin deploy
