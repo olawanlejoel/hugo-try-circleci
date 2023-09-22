@@ -20,7 +20,7 @@ jobs:
           command: hugo
 
       - persist_to_workspace:
-          root: workspace
+          root: /workspace
           paths: [./public]
 
   deploy:
