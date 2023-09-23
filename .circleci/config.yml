@@ -35,21 +35,21 @@ jobs:
           name: Deploy Hugo site
           command: |
             # Configure Git identity
-            # git config --global user.name "olawanlejoel"
-            # git config --global user.email "olawanlejoel@users.noreply.github.com"
+            git config --global user.name "olawanlejoel"
+            git config --global user.email "olawanlejoel@users.noreply.github.com"
 
             # Clone the repository (replace <your-repo> with your actual repository URL)
             git clone --branch deploy --depth 1 https://olawanlejoel:${GITHUB_TOKEN}@github.com/olawanlejoel/hugo-try-circleci.git deployment
 
             # Copy the 'build' directory to the deployment folder
-            cp -R workspace/public deployment
+            # cp -R workspace/public deployment
 
             # Navigate to the deployment folder
-            cd deployment
+            # cd deployment
 
             # Commit and push changes
             git pull origin deploy
-            git add .
+            git add workspace/public
             git commit -m "Auto generated from ${CIRCLE_SHA1}"
             git push
 workflows:
