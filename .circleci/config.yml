@@ -50,7 +50,7 @@ jobs:
             # Commit and push changes
             git add .
             git commit -m "Auto generated from ${CIRCLE_SHA1}"
-            git push -f
+            git push
 
 workflows:
   version: 2
