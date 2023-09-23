@@ -32,7 +32,7 @@ jobs:
           at: workspace
 
       - run:
-          name: Deploy Hugo site
+          name: Push build folder to GitHub
           command: |
             # Configure Git identity
             git config --global user.name "olawanlejoel"
@@ -41,17 +41,16 @@ jobs:
             # Clone the repository (replace <your-repo> with your actual repository URL)
             git clone --branch deploy --depth 1 https://olawanlejoel:${GITHUB_TOKEN}@github.com/olawanlejoel/hugo-try-circleci.git deployment
 
-            # Copy the 'build' directory to the deployment folder
+            # Copy the 'public' directory to the deployment folder
             cp -R workspace/public deployment
 
             # Navigate to the deployment folder
             cd deployment
 
             # Commit and push changes
-            git pull origin deploy
             git add .
             git commit -m "Auto generated from ${CIRCLE_SHA1}"
-            git push
+            git push -f
 
 workflows:
   version: 2
