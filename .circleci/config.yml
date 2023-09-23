@@ -25,7 +25,7 @@ jobs:
           paths:
             - public
 
-  deploy:
+  push build:
     executor: hugo-executor
     steps:
       - attach_workspace:
@@ -35,8 +35,8 @@ jobs:
           name: Deploy Hugo site
           command: |
             # Configure Git identity
-            git config --global user.name "olawanlejoel"
-            git config --global user.email "olawanlejoel@users.noreply.github.com"
+            # git config --global user.name "olawanlejoel"
+            # git config --global user.email "olawanlejoel@users.noreply.github.com"
 
             # Clone the repository (replace <your-repo> with your actual repository URL)
             git clone --branch deploy --depth 1 https://olawanlejoel:${GITHUB_TOKEN}@github.com/olawanlejoel/hugo-try-circleci.git deployment
@@ -61,6 +61,6 @@ workflows:
             branches:
               only:
                 - main
-      - deploy:
+      - push build:
           requires:
             - build
