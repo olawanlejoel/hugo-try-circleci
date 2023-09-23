@@ -36,10 +36,10 @@ jobs:
           command: |
             # Configure Git identity
             git config --global user.name "olawanlejoel"
-            git config --global user.email "olawanlejoel@users.noreply.github.com"
+            git config --global user.email "info4tobest2@gmail.com"
 
             # Clone the repository (replace <your-repo> with your actual repository URL)
-            git clone --branch deploy --depth 1 https://github.com/olawanlejoel/hugo-try-circleci deployment
+            git clone --branch deploy --depth 1 https://olawanlejoel:${GITHUB_TOKEN}@github.com/https://github.com/olawanlejoel/hugo-try-circleci.git deployment
 
             # Copy the 'build' directory to the deployment folder
             cp -R workspace/build/* deployment
