@@ -39,7 +39,7 @@ jobs:
             git config --global user.email "info4tobest2@gmail.com"
 
             # Clone the repository (replace <your-repo> with your actual repository URL)
-            git clone --branch deploy --depth 1 https://github.com/olawanlejoel/hugo-try-circleci.git deployment
+            git clone --branch deploy --depth 1 https://github.com/olawanlejoel/hugo-try-circleci deployment
 
             # Copy the 'build' directory to the deployment folder
             cp -R workspace/build/* deployment
