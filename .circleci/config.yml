@@ -29,20 +29,16 @@ jobs:
     executor: hugo-executor
     steps:
       - attach_workspace:
-          at: /workspace
+          at: workspace
 
       - run:
-          name: Configure Git
+          name: Log the content of the 'build' directory
           command: |
-            git config --global user.name "olawanlejoel"
-            git config --global user.email "olawanlejoel@users.noreply.github.com"
-            git clone ${CIRCLE_REPOSITORY_URL} /repo
-            cd /repo
-            git checkout -b deploy
-            rsync -av --delete /workspace/public/ /repo/
-            git add .
-            git commit -m "Auto generated from ${CIRCLE_SHA1}"
-            git push origin deploy
+            # List the contents of the 'build' directory
+            ls -l workspace/build
+
+            # Print the content of a specific file, e.g., index.html
+            cat workspace/build/index.html
 workflows:
   version: 2
   build-and-deploy:
