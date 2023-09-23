@@ -41,13 +41,13 @@ jobs:
             git clone --branch deploy --depth 1 https://olawanlejoel:${GITHUB_TOKEN}@github.com/olawanlejoel/hugo-try-circleci.git deployment
 
             # Copy the 'build' directory to the deployment folder
-            cp -R workspace/public/* deployment
+            cp -R workspace/public deployment
 
             # Navigate to the deployment folder
             cd deployment
 
             # Commit and push changes
-            git add public
+            git add .
             git commit -m "Auto generated from ${CIRCLE_SHA1}"
             git push origin deploy
 workflows:
