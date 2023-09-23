@@ -18,11 +18,8 @@ jobs:
       - run:
           name: Build Hugo Site
           command: hugo
-      - run:
-          name: Create directory
-          command: mkdir -p workspace
+
       - persist_to_workspace:
-          root: /workspace
           paths: public
 
   deploy:
