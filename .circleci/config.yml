@@ -32,13 +32,25 @@ jobs:
           at: workspace
 
       - run:
-          name: Log the content of the 'build' directory
+          name: Deploy Hugo site
           command: |
-            # List the contents of the 'build' directory
-            ls -l workspace/build
+            # Configure Git identity
+            git config --global user.name "olawanlejoel"
+            git config --global user.email "info4tobest@gmail.com"
 
-            # Print the content of a specific file, e.g., index.html
-            cat workspace/build/index.html
+            # Clone the repository (replace <your-repo> with your actual repository URL)
+            git clone --branch deploy --depth 1 https://github.com/olawanlejoel/hugo-try-circleci.git deployment
+
+            # Copy the 'build' directory to the deployment folder
+            cp -R workspace/build/* deployment
+
+            # Navigate to the deployment folder
+            cd deployment
+
+            # Commit and push changes
+            git add .
+            git commit -m "Auto generated from ${CIRCLE_SHA1}"
+            git push origin deploy
 workflows:
   version: 2
   build-and-deploy:
