@@ -17,16 +17,15 @@ jobs:
 
       - run:
           name: Build Hugo site
-          command: hugo --destination=workspace/build
+          command: hugo --destination=workspace/public
 
       # Persist the 'build' directory to the workspace
       - persist_to_workspace:
           root: workspace
           paths:
-            - build
+            - public
 
   deploy:
-    executor: hugo-executor
     steps:
       - attach_workspace:
           at: workspace
@@ -42,13 +41,13 @@ jobs:
             git clone --branch deploy --depth 1 https://olawanlejoel:${GITHUB_TOKEN}@github.com/olawanlejoel/hugo-try-circleci.git deployment
 
             # Copy the 'build' directory to the deployment folder
-            cp -R workspace/build/* deployment
+            cp -R workspace/public deployment
 
             # Navigate to the deployment folder
             cd deployment
 
             # Commit and push changes
-            git add .
+            git add public
             git commit -m "Auto generated from ${CIRCLE_SHA1}"
             git push origin deploy
 workflows:
