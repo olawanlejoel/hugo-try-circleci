@@ -21,7 +21,6 @@ jobs:
 
       - persist_to_workspace:
           paths: public
-
   deploy:
     executor: hugo-executor
     steps:
