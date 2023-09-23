@@ -19,8 +19,6 @@ jobs:
           name: Build Hugo Site
           command: hugo
 
-      - persist_to_workspace:
-          paths: public
   deploy:
     executor: hugo-executor
     steps:
