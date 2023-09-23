@@ -26,6 +26,7 @@ jobs:
             - public
 
   deploy:
+    executor: hugo-executor
     steps:
       - attach_workspace:
           at: workspace
@@ -41,7 +42,7 @@ jobs:
             git clone --branch deploy --depth 1 https://olawanlejoel:${GITHUB_TOKEN}@github.com/olawanlejoel/hugo-try-circleci.git deployment
 
             # Copy the 'build' directory to the deployment folder
-            cp -R workspace/public/* deployment
+            cp -R workspace/public deployment
 
             # Navigate to the deployment folder
             cd deployment
